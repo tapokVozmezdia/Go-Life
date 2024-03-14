@@ -1,12 +1,12 @@
 package life
 
-import (
-	"math/rand/v2"
-)
+import "math/rand/v2"
 
 type Cell struct {
 	pos    Vector2
 	radius float64
+
+	Brain NeuralNet
 }
 
 func CreateCell(p Vector2, rad float64) *Cell {
@@ -50,9 +50,22 @@ func (cell *Cell) GetRadius() float64 {
 
 func (cell *Cell) Update() {
 
+	// randomized movement
+
 	v := Vector2{
 		float64(rand.IntN(3) - 1),
 		float64(rand.IntN(3) - 1),
 	}
 	cell.MovePosDelta(v)
+
+	// movement with NeuralNet (broken)
+
+	cell.Brain.SetInput(cell.pos, 0)
+
+	cell.Brain.Forward()
+
+	// cell.MovePosDelta(Vector2{
+	// 	cell.Brain.OutNeurons[0].output * 2,
+	// 	cell.Brain.OutNeurons[1].output * 2,
+	// })
 }

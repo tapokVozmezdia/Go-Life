@@ -20,17 +20,18 @@ func (sim *Simulation) StartSim(cell_num int) {
 		}
 
 		sim.Cells = append(sim.Cells, *CreateCell(v, 5))
+		sim.Cells[len(sim.Cells)-1].Brain.RandomizeWeights()
 	}
 }
 
 func (sim *Simulation) UpdateAll() {
-	for i, _ := range sim.Cells {
+	for i := 0; i < len(sim.Cells); i++ {
 		sim.Cells[i].Update()
 	}
 }
 
 func (sim *Simulation) PullAllInRad(mouse_pos Vector2, rad float64, force float64) {
-	for i, _ := range sim.Cells {
+	for i := 0; i < len(sim.Cells); i++ {
 		if GetLenBetweenVectors(
 			&(sim.Cells[i].pos),
 			&mouse_pos,

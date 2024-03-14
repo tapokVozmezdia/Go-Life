@@ -56,7 +56,7 @@ func run() {
 		}
 
 		if len(simulation.Cells) > 0 {
-			fmt.Println(simulation.Cells[0].GetPos())
+			// fmt.Println(simulation.Cells[0].Brain.HidNeurons[3].GetInfo())
 		}
 
 		imd.Clear()
